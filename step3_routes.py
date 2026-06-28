@@ -1,20 +1,17 @@
-from fastapi import FastAPI 
-from step1_repository import Person, PersonRepository, InMemoryPersonRepository
+from fastapi import FastAPI, Depends
+from step4_dependencies import get_service
 from step2_service import PersonService
 
 # comment
 app = FastAPI()
 
-repo = InMemoryPersonRepository()
-service = PersonService(repo)
-
 @app.get("/people")
-def list_all():
+def list_all(service: PersonService = Depends(get_service)):
     people = service.list_people()
     return [{'id': p.id, 'name': p.name, 'age': p.age} for p in people]
 
 @app.get("/people/legal-age")
-def list_legal_age():
+def list_legal_age(service: PersonService = Depends(get_service)):
     people = service.list_legal_age_people()
     return [{'id': p.id, 'name': p.name, 'age': p.age} for p in people]
 
