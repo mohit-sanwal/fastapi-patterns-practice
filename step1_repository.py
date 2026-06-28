@@ -11,9 +11,9 @@ class PersonRepository:
 class InMemoryPersonRepository(PersonRepository):
     def find_all(self):
         return [
-            Person(1, 'Rohit', 25),
-            Person(1, 'Jack', 27),
-            Person(1, 'Jill', 26),
+             Person(1, "Rohit", 25),
+            Person(2, "Jack", 16),
+            Person(3, "Jill", 30),
         ]
 
 repo = InMemoryPersonRepository()
